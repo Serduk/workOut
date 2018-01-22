@@ -2,6 +2,7 @@ package com.example.sserdiuk.workout;
 
 /**
  * Simple class from which app will be get all information
+ * This data will be used in WorkoutDetailFragment
  *
  * Created by sserdiuk on 1/22/18.
  */
