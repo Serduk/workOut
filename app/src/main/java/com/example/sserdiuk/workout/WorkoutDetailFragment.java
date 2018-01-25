@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -23,6 +24,25 @@ public class WorkoutDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_workout_detail, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        /*
+        * Method getView get root object View of fragment
+        * Nex: received object used for receive links for text,
+        * which should be displayed in title and description
+        * */
+        View view = getView();
+
+        if (view != null) {
+            TextView title = (TextView) view.findViewById(R.id.textTitle);
+            Workout workout = Workout.workouts[(int) workoutID];
+            title.setText(workout.getName());
+            TextView description = (TextView) view.findViewById(R.id.textDescription);
+            description.setText(workout.getDescription());
+        }
     }
 
     public void setWorkout(long id) {
