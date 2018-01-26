@@ -1,19 +1,32 @@
 package com.example.sserdiuk.workout;
 
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WorkoutListFragment.WorkoutListListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        WorkoutDetailFragment fragment = (WorkoutDetailFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.detail_frag);
 
-        fragment.setWorkout(1);
+
+
+    /**
+     * Method for replacing fragments in frame
+     * */
+    @Override
+    public void itemClicked(long id) {
+        WorkoutDetailFragment details = new WorkoutDetailFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        details.setWorkout(id);
+        fragmentTransaction.replace(R.id.fragment_container, details);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.commit();
     }
 }
