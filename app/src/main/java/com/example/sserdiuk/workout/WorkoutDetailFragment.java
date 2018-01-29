@@ -3,6 +3,7 @@ package com.example.sserdiuk.workout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,18 @@ public class WorkoutDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             workoutID = savedInstanceState.getLong("workoutID");
+        } else {
+//        Open transaction
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            StopwatchFragment stopwatchFragment = new StopwatchFragment();
+//        replace fragment in frame
+            ft.replace(R.id.stopwatch_container, stopwatchFragment);
+//        add transaction to stack for returning
+            ft.addToBackStack(null);
+//        choose stile for animation
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//        zakrepit transaction
+            ft.commit();
         }
 
         // Inflate the layout for this fragment
